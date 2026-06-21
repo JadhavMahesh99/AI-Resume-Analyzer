@@ -25,6 +25,12 @@ score = len(found_skills) * 15
 
 print("\nResume Score:", score)
 
+total_skills = len(skills)
+
+percentage = (len(found_skills) / total_skills) * 100
+
+print("Match Percentage:", round(percentage, 2), "%")
+
 missing_skills = []
 
 for skill in skills:
