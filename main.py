@@ -7,10 +7,7 @@ skills = [
     "Data Structures"
 ]
 
-resume_text = """
-Mahesh Jadhav
-Skills: Python, Java, Machine Learning
-"""
+resume_text = input("Paste Resume Text: ")
 
 found_skills = []
 
