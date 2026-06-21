@@ -1,2 +1,8 @@
-# AI-Resume-Analyzer
-A Python project to analyze resumes and identify technical skills.
+##AI Resume Analyzer
+This project analyzes resumes and identifies technical skills.
+##Features
+- Skill Detection
+- Resume Scoring
+- Missing Skill Suggestions
+##Technologies
+- Python
