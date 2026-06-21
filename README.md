@@ -6,3 +6,10 @@ This project analyzes resumes and identifies technical skills.
 - Missing Skill Suggestions
 ##Technologies
 - Python
+## Current Features
+
+- Reads resume from text file
+- Detects technical skills
+- Calculates resume score
+- Shows match percentage
+- Suggests missing skills
