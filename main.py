@@ -1,43 +1,65 @@
+import PyPDF2
+import docx
+
 skills = [
-    "Python",
-    "Java",
-    "SQL",
-    "Git",
-    "Machine Learning",
-    "Data Structures"
+    "Python", "Java", "C Programming", "SQL",
+    "Git", "Machine Learning", "Cybersecurity",
+    "Data Structures", "HTML", "CSS"
 ]
 
-with open("sample_resume.txt", "r") as file:
-    resume_text = file.read()
-    
-found_skills = []
+def read_pdf(file_path):
+    text = ""
+    with open(file_path, "rb") as file:
+        reader = PyPDF2.PdfReader(file)
+        for page in reader.pages:
+            text += page.extract_text()
+    return text
 
-for skill in skills:
-    if skill.lower() in resume_text.lower():
-        found_skills.append(skill)
+def read_docx(file_path):
+    doc = docx.Document(file_path)
+    text = ""
+    for para in doc.paragraphs:
+        text += para.text + " "
+    return text
 
-print("Skills Found:")
+def analyze_resume(text):
+    text = text.lower()
 
-for skill in found_skills:
-    print("-", skill)
+    found_skills = []
+    missing_skills = []
 
-score = len(found_skills) * 15
+    for skill in skills:
+        if skill.lower() in text:
+            found_skills.append(skill)
+        else:
+            missing_skills.append(skill)
 
-print("\nResume Score:", score)
+    print("\n===== ATS RESUME ANALYZER =====\n")
 
-total_skills = len(skills)
+    print("✔ Found Skills:")
+    for skill in found_skills:
+        print("-", skill)
 
-percentage = (len(found_skills) / total_skills) * 100
+    score = len(found_skills) * 10
+    print("\n📊 Score:", score, "/100")
 
-print("Match Percentage:", round(percentage, 2), "%")
+    percentage = (len(found_skills) / len(skills)) * 100
+    print("📈 Match %:", round(percentage, 2), "%")
 
-missing_skills = []
+    print("\n❌ Missing Skills:")
+    for skill in missing_skills:
+        print("-", skill)
 
-for skill in skills:
-    if skill.lower() not in resume_text.lower():
-        missing_skills.append(skill)
 
-print("\nMissing Skills:")
+file_path = input("Enter file name (pdf/docx): ")
 
-for skill in missing_skills:
+if file_path.endswith(".pdf"):
+    resume_text = read_pdf(file_path)
+elif file_path.endswith(".docx"):
+    resume_text = read_docx(file_path)
+else:
+    print("❌ Only PDF or DOCX supported")
+    exit()
+
+analyze_resume(resume_text)
     print("-", skill)
